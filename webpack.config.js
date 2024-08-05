@@ -18,6 +18,11 @@ module.exports = (webpackConfigEnv, argv) => {
       chunkFormat: 'commonjs',
       publicPath: '/', 
     },
+    resolve: {
+      alias: {
+        'zone.js': path.resolve(__dirname, 'node_modules/zone.js/dist/zone.js'), // Alias para zone.js
+      },
+    },
     plugins: [
       new HtmlWebpackPlugin({
         inject: false,
@@ -30,12 +35,12 @@ module.exports = (webpackConfigEnv, argv) => {
     ],
     devServer: {
       static: {
-        directory: path.join(__dirname, 'public'), // Directorio que contiene los archivos estáticos
+        directory: path.join(__dirname, 'public'),
       },
       compress: true,
       port: 9000,
-      historyApiFallback: true, // Para aplicaciones SPA que usan enrutamiento del lado del cliente
-      hot: true, // Habilita Hot Module Replacement (HMR)
+      historyApiFallback: true,
+      hot: true,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
